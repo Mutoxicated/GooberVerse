@@ -7,7 +7,6 @@ const SCR_HEIGHT: u32 = 600;
 
 pub fn main() {
     // glfw: initialize and configure
-    // ------------------------------
     let mut glfw = glfw::init(glfw::fail_on_errors!()).unwrap();
     glfw.window_hint(glfw::WindowHint::ContextVersion(3, 3));
     glfw.window_hint(glfw::WindowHint::OpenGlProfile(glfw::OpenGlProfileHint::Core));
@@ -15,7 +14,6 @@ pub fn main() {
     glfw.window_hint(glfw::WindowHint::OpenGlForwardCompat(true));
 
     // glfw window creation
-    // --------------------
     let (mut window, events) = glfw.create_window(SCR_WIDTH, SCR_HEIGHT, "LearnOpenGL", glfw::WindowMode::Windowed)
         .expect("Failed to create GLFW window");
 
@@ -24,18 +22,13 @@ pub fn main() {
     window.set_framebuffer_size_polling(true);
 
     // gl: load all OpenGL function pointers
-    // ---------------------------------------
     gl::load_with(|symbol| window.get_proc_address(symbol).unwrap() as *const _);
 
     // render loop
-    // -----------
     while !window.should_close() {
-        // events
-        // -----
         process_events(&mut window, &events);
 
         // glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
-        // -------------------------------------------------------------------------------
         window.swap_buffers();
         glfw.poll_events();
     }
